@@ -68,6 +68,15 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.get("/logout", async (req, res, next) => {
+  try {
+    res.clearCookie("token");
+    res.status(200).json({ message: "logout successful" });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.use(({ code, message }, req, res, next) => {
   res.status(code).json({ message });
 });
